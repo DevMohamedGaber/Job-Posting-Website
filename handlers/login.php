@@ -2,6 +2,11 @@
 // start session
 session_start();
 
+// check if user not logged in, otherwise return to home page
+if(isset($_SESSION['user']) || $_SESSION['user'] != null) {
+    header('Location: /index.php');
+    exit();
+}
 // check if it's a post request
 if($_SERVER["REQUEST_METHOD"] != 'POST') {
     echo "Wrong request method";
