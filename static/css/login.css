@@ -1,0 +1,169 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+main {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+main.registering .login {
+    display: none;
+}
+main.registering .register {
+    display: flex;
+}
+
+.part {
+    width: 50vw;
+}
+
+.image {
+    background-image: url(../images/login-img.webp);
+    background-position: 50% 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.form {
+    background-color: white;
+    padding: 20px;
+}
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.greet {
+    font-size: 35px;
+    font-family: fantasy;
+    color: #04245f;
+    margin-bottom: 30px;
+}
+form {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+.field {
+    display: flex;
+    width: 100%;
+    position: relative;
+    padding: 10px 0;
+}
+.field.bordered {
+    flex-direction: column;
+    padding: 12px 30px;
+    border: 1px solid #ccc;
+}
+
+.field label {
+    color: #666;
+}
+
+.field input[type=text], .field input[type=password] {
+    border: none;
+    height: 30px;
+}
+
+.field input[type=text]:focus-visible, .field input[type=password]:focus-visible {
+    outline: none;
+}
+.field .selected {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 5px;
+    height: 100%;
+    background-color: #eb514ee3;
+}
+.field:focus-within .selected {
+    display: block;
+}
+
+.field:not(.bordered) label {
+    margin-left: 10px;
+}
+.btn {
+    padding: 10px 50px;
+    margin-right: 10px;
+    font-size: 15px;
+    font-family: monospace;
+    font-weight: 600;
+    cursor: pointer;
+}
+.loginBtn {
+    background-color: #04245f;
+    color: white;
+    border: none;
+    border-radius: 3px;
+}
+.registerBtn {
+    background: none;
+    color: #04245f;
+    border: 1px solid #04245f;
+    cursor: pointer;
+}
+.goToLoginBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #cd2b35;
+    margin-left: 5px;
+}
+
+.register {
+    display: none;
+}
+#ErrorBox {
+    display: flex;
+    flex-direction: column;
+    color: #ff2e2e;
+    font-size: 16px;
+    font-family: monospace;
+}
+#ErrorBox p {
+    margin-bottom: 5px;
+}
+@media (max-width: 900px) and (min-width: 601px) {
+    .form {
+        flex-grow: 1;
+        padding: 0;
+    }
+    .container {
+        width: 95%;
+        max-width: 0 auto;
+    }
+    .image {
+        width: 40vw;
+        background-size: auto;
+        background-position: 60% 0;
+    }
+}
+@media screen and (max-width: 600px) {
+    .form {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80vw;
+        height: 90vh;
+
+    }
+    .image {
+        width: 100vw;
+        background-size: auto;
+    }
+    .field:last-child {
+        flex-direction: column;
+    }
+    .goToLoginBtn {
+        margin-top: 10px;
+    }
+}

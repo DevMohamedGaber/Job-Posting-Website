@@ -1,0 +1,399 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f4f4;
+}
+
+.job-listing {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 20px 20px 5px 20px;
+  max-width: 600px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0 auto 10px;
+}
+
+.job-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.job-header-img {
+  /* background-image: url("https://placehold.co/120x120?text=Comp_Img"); */
+  background-image: url("../images/images.jpeg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  min-width: 105px;
+  width: 120px;
+  height: auto;
+  margin-left: 10px;
+}
+
+.job-header-data h2 {
+  font-size: 24px;
+  color: #333;
+}
+
+.job-header-data .company {
+  font-size: 16px;
+  color: #666;
+}
+
+.job-header-data .location {
+  font-style: italic;
+  color: #888;
+}
+
+.job-header-data .posted,
+.job-header-data .applicants-num {
+  font-size: 14px;
+  color: #999;
+}
+
+.buttons {
+  margin-top: 10px;
+}
+
+.apply-btn,
+.details-btn {
+  display: inline-block;
+  margin: 10px 5px 0 0;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.apply-btn {
+  background-color: #007bff;
+}
+
+.apply-btn:hover {
+  background-color: #0056b3;
+}
+
+.details-btn {
+  background-color: #28a745;
+}
+
+.details-btn:hover {
+  background-color: #218838;
+}
+
+.job-details {
+  display: none;
+  margin-top: 20px;
+  animation: fadeIn 0.5s;
+}
+
+.job-details div {
+  margin-bottom: 25px;
+}
+
+.job-info h3 {
+  font-size: 18px;
+  color: #333;
+}
+
+.job-info p {
+  margin: 5px 0 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.description {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.skills h3 {
+  margin-top: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.skills ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.skills ul li {
+  background-color: #e9ecef;
+  display: inline-block;
+  margin: 5px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #333;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media(max-width: 550px) {
+  .job-header-img {
+    display: none;
+  }
+}
+
+/* Interaction Section Styles */
+
+.interaction-section {
+  margin-top: 20px;
+  padding-top: 10px;
+}
+
+.interaction-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #666;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 10px;
+}
+
+.interaction-buttons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 40px;
+  margin-top: 2px;
+  color: #444;
+}
+
+.interaction-buttons span {
+  width: 100%;
+  height: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.interaction-buttons span:hover {
+  background-color: #e0e0e0;
+}
+
+.add-comment {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.comment-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 20px;
+}
+
+.comment-input:focus {
+  border: 1px solid #000;
+}
+
+/* Comments Section */
+
+.comments-section {
+  margin-top: 10px;
+}
+
+.comment {
+  padding: 10px 0px;
+  /* border-bottom: 1px solid #e0e0e0; */
+  display: flex;
+}
+
+.comment-data {
+  padding: 12px 10px 10px 10px;
+  background-color: #f7f7f7;
+  width: 100%;
+  border-radius: 4px;
+}
+
+.comment-actions {
+  float: right;
+  margin-right: 7px;
+}
+
+.comment-actions .actions-btn {
+  font-size: 18px;
+  background-color: transparent;
+  border: none;
+}
+
+.comment-actions  .actions-menu {
+  display: none;
+}
+
+.comment-actions .actions-menu p {
+  height: 50%;
+}
+
+.comment-actions .actions-menu {
+  width: 60px;
+  height: 50px;
+  background-color: #f1f1f1;
+  font-size: 14px;
+  padding: 5px;
+}
+
+.comment-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  margin-top: 8px;
+}
+
+.comment-user-name {
+  font-weight: bold;
+  font-size: 14px;
+  color: #333;
+}
+
+.comment-user-title {
+  margin-top: 3px;
+  font-size: 12px;
+  color: #666;
+}
+
+.comment-time {
+  margin-top: 3px;
+  font-size: 12px;
+  color: #999;
+}
+
+.comment-body {
+  margin-top: 10px;
+  font-size: 15px;
+  color: #333;
+}
+
+.replies {
+  margin-top: 0px;
+  padding-left: 50px;
+}
+
+.reply {
+  padding: 10px 0;
+}
+
+
+/* resume popup styles */
+
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 5px;
+  max-width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.3s;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-content h2 {
+  margin: 0 0 15px;
+  font-size: 24px;
+  color: #333;
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-content form label {
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #333;
+}
+
+.modal-content form input[type="file"] {
+  margin-bottom: 20px;
+  /* width: 350px; */
+  max-width: 100%;
+  color: #444;
+  padding: 5px;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #555;
+}
+
+.modal-content form input[type=file]::file-selector-button {
+  margin-right: 20px;
+  border: none;
+  background: #084cdf;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  transition: background .2s ease-in-out;
+}
+
+.modal-content form input[type=file]::file-selector-button:hover {
+  background: #0d45a5;
+}
+
+.modal-content form button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-content form button:hover {
+  background-color: #0056b3;
+}

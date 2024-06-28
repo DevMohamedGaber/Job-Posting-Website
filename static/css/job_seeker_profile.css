@@ -1,0 +1,117 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f5f6f7;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.profile-container {
+  max-width: 900px;
+  margin: 0 auto;
+  margin-top: 50px;
+  padding: 20px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+}
+
+.profile-pic {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  margin-right: 20px;
+}
+
+.profile-info h1 {
+  margin: 0;
+  font-size: 28px;
+  color: #333;
+}
+
+.profile-info h2 {
+  margin: 5px 0 0;
+  font-size: 20px;
+  color: #777;
+}
+
+.info-section {
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+}
+
+.info-item {
+  width: 45%;
+  margin-bottom: 10px;
+}
+
+.info-label {
+  font-weight: bold;
+  color: #333;
+  display: inline-block;
+  width: 100px;
+}
+
+.info-value {
+  color: #555;
+}
+
+.profile-header,
+.info-card,
+.about-section,
+.experience-section,
+.skills-section {
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.about-section h3,
+.experience-section h3,
+.skills-section h3 {
+  margin-top: 0;
+  font-size: 24px;
+  color: #333;
+}
+
+.experience {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 15px;
+}
+
+.experience h4 {
+  margin: 0;
+  font-size: 20px;
+  color: #333;
+}
+
+.experience p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.skill {
+  display: inline-block;
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 20px;
+  margin: 5px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.skill:hover {
+  background-color: #0056b3;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 500;
+}
+
