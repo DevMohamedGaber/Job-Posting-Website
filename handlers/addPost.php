@@ -60,8 +60,6 @@ $db->Query("INSERT INTO job_posts(position, industry, location, author_id, salar
     $_POST['description']
 ]);
 // get back recored
-$post = $db->Query("SELECT * FROM job_posts WHERE id=?", [$db->GetLastId()])->fetch();
-
-
+$post = $db->Query("SELECT * FROM job_posts WHERE id=?", [$db->GetLastId()])->fetch(PDO::FETCH_ASSOC);
 // return success
 echo json_encode($post);

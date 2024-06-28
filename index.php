@@ -217,11 +217,11 @@
     
         <div id="applyModal" class="modal">
           <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
+            <span class="close" onsubmit="closeModal()">&times;</span>
             <h2>Upload Resume</h2>
-            <form id="applyForm">
-              <input type="file" id="resume" name="resume" required />
-              <button type="submit" onclick="SubmitCurrentJobRequest(event)">Submit Application</button>
+            <form id="applyForm" onsubmit="Apply(event)">
+              <input type="text" id="resume" name="content" placeholder="CV URL here"/>
+              <button type="submit">Submit Application</button>
             </form>
             <p class="msg"></p>
           </div>

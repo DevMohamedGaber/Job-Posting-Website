@@ -4,8 +4,6 @@ const PostsList = document.getElementById("PostsList")
 const applyModal = document.getElementById('applyModal');
 const popup = document.getElementById("popup");
 const postTemplate = PostsList.children[0]
-
-var userToken = window.localStorage.getItem("userToken")
 var selectedJob = null
 
 function toggleMenu() {
@@ -15,12 +13,6 @@ function toggleMenu() {
     } else {
       menu.style.display = "block";
     }
-}
-function SwitchOnline() {
-    navbar.classList.toggle('online')
-}
-function redirectToPage(from, to = "index.html") {
-    window.location.href = window.location.href.replace(from, to)
 }
 function toggleDetails(num) {
     const details = PostsList.querySelector('#job-details-' + num);
@@ -36,11 +28,12 @@ async function SubmitCurrentJobRequest() {
 }
 function OpenModal(id) {
     selectedJob = id
-    applyModal.style.display = 'block';
+    applyModal.style.display = 'block'
 }
 
 function closeModal() {
-applyModal.style.display = 'none';
+    selectedJob = null
+    applyModal.style.display = 'none'
 }
 
 window.onclick = function (event) {
@@ -48,18 +41,6 @@ if (event.target == applyModal) {
     applyModal.style.display = 'none';
 }
 };
-// calls
-async function AddApply() {
-    let formData = new FormData();
-    formData.append('Authorization', `Bearer ${userToken}`)
-    formData.append('post_id', selectedJob)
-    const response = await fetch(API + 'post/apply', {
-        credentials: "same-origin",
-        method: "POST",
-        body: formData
-    })
-    return response.json()
-}
 
 document.addEventListener("DOMContentLoaded", () => {
     const openPopupBtn = document.getElementById("openPopup");
@@ -200,7 +181,6 @@ async function AddPost(e) {
         console.log(await response.text())
         return
     }
-
     ShowPost(res)
     e.target.reset()
     closeCreatePostPopup()
@@ -218,36 +198,95 @@ async function Logout() {
     window.location.href = '/login.php'
 }
 function ShowPost(post) {
-    const el = postTemplate.cloneNode(true)
-        
-    el.querySelector(".postPosition").innerHTML = post['position']
-    el.querySelector(".company").innerHTML = `${post['company']} <span class="location">- ${post['location']}</span>`
-    el.querySelector(".posted").innerHTML = `posted ${post['created_at']}`
-    el.querySelector(".salary-value").innerHTML = post['salary'] != 0 ? post['salary'] + '$' : 'Confidential'
-    el.querySelector(".industry-value").innerHTML = post['industry']
-    el.querySelector(".description").innerHTML = post['description']
-    el.querySelector(".apply-btn").addEventListener('click', (e) => {
-        OpenModal(post['id'])
+    let num = PostsList.children.length
+    PostsList.innerHTML += `
+        <div class="job-listing" id="job-post-${num}">
+            <div class="job-header">
+            <div class="job-header-data">
+                <h2 class="postPosition">${post['position']}</h2>
+                <p class="company">
+                Company Name
+                <span class="location">- ${post['location']}</span>
+                </p>
+                <p class="posted">${post['created_at']}</p>
+                <p class="applicants-num">0 Applicants</p>
+                <div class="buttons">
+                <button class="apply-btn" onclick="OpenModal(${post['id']})">Apply For Job</button>
+                <button class="details-btn" onclick="toggleDetails(${num})">Show Details</button>
+                </div>
+            </div>
+            <div class="job-header-img"></div>
+        </div>
+      
+        <div class="job-details" id="job-details-${num}">
+            <div class="job-info">
+            <div>
+                <h3>Salary</h3>
+                <p class="salary-value">${post['salary']}</p>
+            </div>
+            <div>
+                <h3>Industry</h3>
+                <p class="industry-value">${post['industry']}</p>
+            </div>
+            <div>
+                <h3>Job Description</h3>
+                <p class="description">${post['description']}</p>
+            </div>
+            </div>
+        </div>
+      
+        <!-- start interaction-section -->
+    
+        <div class="interaction-section">
+            <div class="interaction-header">
+            <div class="likes-count">
+                <span>👍 0 Likes</span>
+            </div>
+            <div class="comments-count">
+                <span>0 comments</span>
+            </div>
+            </div>
+            <div class="interaction-buttons">
+            <span  onclick="LikePost(event, ${post['id']})">Like</span>
+            <span class="comments-show" onclick="ShowComments(${post['id']}, ${num})">Comments</span>
+            </div>
+    
+            <!-- strat toggleable comments section -->
+    
+            <div id="comments-container" style="display: none">
+            <div class="add-comment">
+                <img
+                src="https://placehold.co/40x40?text=img"
+                alt="User Avatar"
+                class="user-avatar"
+                />
+                <input
+                id="addCommentInput"
+                type="text"
+                placeholder="Add a comment..."
+                class="comment-input"
+                onkeypress="return AddComment(event, ${post['id']}, ${num})"
+                />
+            </div>
+            <div class="comments-section"></div>
+            </div>
+        </div>`
+}
+async function Apply(e) {
+    e.preventDefault()
+
+    let formData = new FormData(e.target)
+    formData.append('id', selectedJob)
+    const response = await fetch('/handlers/apply.php', {
+        method: "POST",
+        body: formData
     })
-    el.querySelector(".apply-btn").addEventListener('click', (e) => {
-        OpenModal(post['id'])
-    })
-    el.querySelector(".details-btn").addEventListener('click', (e) => {
-        toggleDetails(el)
-    })
-    el.querySelector(".comments-show").addEventListener('click', async (e) => {
-        toggleComments(el)
-        await ShowComments(post, el)
-    })
-    var postId = post.id
-    el.querySelector('#addCommentInput').addEventListener("keypress", async function(event) {
-        if (event.key === "Enter") {
-            event.preventDefault()
-            const content = event.target.value
-            console.log(postId);
-            let comment = await SendComment(post.id, content)
-            AddComment(el.querySelector('.comments-section'), comment['data'])
-        }
-        })
-    PostsList.appendChild(el);
+    let res = await response.text()
+
+    if(res != "Done") {
+        applyModal.querySelector('.msg').innerHTML = res
+        return
+    }
+    e.target.reset()
+    closeModal();
 }
