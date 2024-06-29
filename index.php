@@ -177,34 +177,7 @@
                     onkeypress="return AddComment(event, <?php echo $post['id'] .','. $i?>)"
                   />
                 </div>
-                <div class="comments-section">
-      
-                  <!-- placeholder comment -->
-      
-                  <div class="comment">
-                    <img
-                      src="https://placehold.co/40x40?text=img"
-                      alt="User Avatar"
-                      class="comment-avatar"
-                    />
-                    <div class="comment-data">
-                      <div class="comment-actions">
-                        <button class="actions-btn" onclick="showCommentActions()">
-                          ...
-                        </button>
-                        <div class="actions-menu">
-                          <p>Edit</p>
-                          <p>Delete</p>
-                        </div>
-                      </div>
-                      <p class="comment-user-name"></p>
-                      <p class="comment-user-title"></p>
-                      <p class="comment-time"></p>
-                      <p class="comment-body"></p>
-                    </div>
-                  </div>
-
-                </div>
+                <div class="comments-section"></div>
               </div>
             </div>
           

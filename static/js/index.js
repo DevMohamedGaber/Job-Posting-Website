@@ -158,7 +158,7 @@ async function AddComment(e, id, i) {
                     <p>Delete</p>
                 </div>
                 </div>
-                <p class="comment-user-name">${user['fists_name'] + " " + user['fists_name']}</p>
+                <p class="comment-user-name">${user['first_name'] + " " + user['last_name']}</p>
                 <p class="comment-user-title">${user['title']}</p>
                 <p class="comment-time">${date}</p>
                 <p class="comment-body">${e.target.value}</p>

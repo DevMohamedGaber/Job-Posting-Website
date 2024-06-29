@@ -3,7 +3,7 @@
 session_start();
 
 // check if user not logged in, otherwise return to home page
-if(isset($_SESSION['user']) || $_SESSION['user'] != null) {
+if(isset($_SESSION['user'])) {
     header('Location: /index.php');
     exit();
 }
@@ -28,7 +28,7 @@ require_once('../core/Database.php');
 // start new instance
 $db = new Database();
 // get user from database if possible
-$user = $db->Query("SELECT * FROM users WHERE email=? AND password=?", [$_REQUEST['email'], $_REQUEST['password']])->fetch();
+$user = $db->Query("SELECT * FROM users WHERE email=? AND password=?", [$_REQUEST['email'], $_REQUEST['password']])->fetch(PDO::FETCH_ASSOC);
 // close database connection
 $db->CloseConnection();
 

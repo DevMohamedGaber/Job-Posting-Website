@@ -25,9 +25,6 @@ for ($i=0; $i < count($posts); $i++) {
     // check is liked
     $isLiked = $db->Query("SELECT * FROM reactions WHERE post_id=? AND author_id=?", [$post['id'], $_SESSION['user']['id']])->fetch();
     $post['is_liked'] = $isLiked;
-
-    //var_dump($post);
     $posts[$i] = $post;
 }
-//var_dump($posts);
 $db->CloseConnection();
