@@ -1,11 +1,6 @@
 const mainEl = document.getElementById("MainBody")
 const ErrBox = document.getElementById("ErrorBox")
 
-window.onload = () => {
-    if(window.localStorage.getItem("userToken") !== null) {
-        redirectToPage('login.html')
-    }
-}
 // calls
 async function OnLogin(e) {
     e.preventDefault()
@@ -23,8 +18,7 @@ async function OnLogin(e) {
         HandleErrors(res)
         return
     }
-
-    redirectToPage("login.html");
+    window.location.href = '/index.php'
 }
 
 async function OnRegister(e) {
@@ -40,7 +34,7 @@ async function OnRegister(e) {
 
     const response = await fetch('/handlers/register.php', {
         method: "POST",
-        body: new URLSearchParams(formData),
+        body: formData,
     })
     res = await response.text()
 
@@ -57,9 +51,6 @@ function SwitchForms() {
     ErrBox.innerHTML = ''
     mainEl.classList.toggle('registering')
     return false
-}
-function redirectToPage(from, to = "index.html") {
-    window.location.href = window.location.href.replace(from, to)
 }
 
 function HandleErrors(errs) {

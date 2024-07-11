@@ -88,13 +88,13 @@
         <p id="showMoreLink">Show more</p>
       </div>
       <div class="main-content">
-        <div class="add-post">
+        <div class="add-post" >
           <img
             src="https://placehold.co/70x70?text=img"
             alt=""
             id="add-post-prof-img"
           />
-          <button id="openPopup">Add Post</button>
+          <button id="openPopup" onclick="openCreatePostPopup()">Add Post</button>
         </div>
         <div class="sort-by">
           <hr />
@@ -228,7 +228,7 @@
     </div>
     <div id="popup" class="popup">
       <div class="popup-content">
-        <span class="close">&times;</span>
+        <span class="close" onclick="closeCreatePostPopup()">&times;</span>
         <form onsubmit="AddPost(event)">
           <div class="form-row">
             <label for="position">Position</label>

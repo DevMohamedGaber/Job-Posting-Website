@@ -1,11 +1,18 @@
-const profileMenu = document.getElementById("profileMenu")
-const navbar = document.getElementById("Navbar")
 const PostsList = document.getElementById("PostsList")
 const applyModal = document.getElementById('applyModal');
 const popup = document.getElementById("popup");
-const postTemplate = PostsList.children[0]
 var selectedJob = null
 
+/* hock */
+window.onclick = function (event) {
+    if (event.target == applyModal) {
+        applyModal.style.display = 'none';
+    }
+    if (event.target === popup) {
+        closeCreatePostPopup()
+    }
+};
+/* toggles */
 function toggleMenu() {
     var menu = document.getElementById("navbarMenu");
     if (menu.style.display === "block") {
@@ -22,50 +29,25 @@ function toggleComments(parent) {
     const commentsContainer = parent.querySelector('#comments-container');
     commentsContainer.style.display = commentsContainer.style.display === 'none' || commentsContainer.style.display === '' ? 'block' : 'none';
 }
-async function SubmitCurrentJobRequest() {
-    let res = await AddApply()
-    applyModal.querySelector('.msg').innerHTML = res['data']
-}
+/* Modal functions */
 function OpenModal(id) {
     selectedJob = id
     applyModal.style.display = 'block'
 }
-
 function closeModal() {
     selectedJob = null
     applyModal.style.display = 'none'
 }
 
-window.onclick = function (event) {
-if (event.target == applyModal) {
-    applyModal.style.display = 'none';
-}
-};
-
-document.addEventListener("DOMContentLoaded", () => {
-    const openPopupBtn = document.getElementById("openPopup");
-    const closeBtn = document.querySelector(".close");
-
-    openPopupBtn.addEventListener("click", () => {
-      popup.style.display = "block";
-    });
-
-    closeBtn.addEventListener("click", () => {
-        closeCreatePostPopup()
-    });
-
-    window.addEventListener("click", (event) => {
-      if (event.target === popup) {
-        closeCreatePostPopup()
-      }
-    });
-  });
-
+/* popup fuctions */
 function closeCreatePostPopup() {
     popup.style.display = "none";
 }
+function openCreatePostPopup() {
+    popup.style.display = "block";
+}
 
-
+/* api calls */
 async function LikePost(e, id) {
     let formData = new FormData()
     formData.append('post_id', id)
@@ -119,7 +101,6 @@ async function ShowComments(id, i) {
             </div>`
     }
 }
-
 async function AddComment(e, id, i) {
     if(e.key !== "Enter") {
         return
@@ -185,7 +166,24 @@ async function AddPost(e) {
     e.target.reset()
     closeCreatePostPopup()
 }
+async function Apply(e) {
+    e.preventDefault()
 
+    let formData = new FormData(e.target)
+    formData.append('id', selectedJob)
+    const response = await fetch('/handlers/apply.php', {
+        method: "POST",
+        body: formData
+    })
+    let res = await response.text()
+
+    if(res != "Done") {
+        applyModal.querySelector('.msg').innerHTML = res
+        return
+    }
+    e.target.reset()
+    closeModal();
+}
 async function Logout() {
     const response = await fetch('/handlers/logout.php', {
         method: "POST",
@@ -197,7 +195,9 @@ async function Logout() {
     }
     window.location.href = '/login.php'
 }
-function ShowPost(post) {
+
+/* helpers */
+function ShowPost(post) {n
     let num = PostsList.children.length
     PostsList.innerHTML += `
         <div class="job-listing" id="job-post-${num}">
@@ -271,22 +271,4 @@ function ShowPost(post) {
             <div class="comments-section"></div>
             </div>
         </div>`
-}
-async function Apply(e) {
-    e.preventDefault()
-
-    let formData = new FormData(e.target)
-    formData.append('id', selectedJob)
-    const response = await fetch('/handlers/apply.php', {
-        method: "POST",
-        body: formData
-    })
-    let res = await response.text()
-
-    if(res != "Done") {
-        applyModal.querySelector('.msg').innerHTML = res
-        return
-    }
-    e.target.reset()
-    closeModal();
 }
